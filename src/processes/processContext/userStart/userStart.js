@@ -33,6 +33,9 @@ async function userStart({ from }) {
 				to: from,
 				intent: "startNew",
 				lang: from.lang,
+				data: {
+					firstName: from.firstName || DEFAULT_NAME,
+				},
 			});
 
 			getDBRequest("addUser", {

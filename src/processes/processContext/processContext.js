@@ -2,6 +2,7 @@ const { log } = require("../../services/log/log");
 
 const { userStart } = require("./userStart/userStart");
 const { userHelp } = require("./userHelp/userHelp");
+const { userOrientation } = require("./userOrientation/userOrientation");
 const { userCancel } = require("./userCancel/userCancel");
 const {
 	forwardMessageToSlack,
@@ -15,6 +16,8 @@ function processContext(context, data, botContext) {
 				return userStart(data);
 			case "tHelp":
 				return userHelp(data);
+			case "tOrientation":
+				return userOrientation(data);
 			case "tCancelButton":
 				return userCancel(data);
 			case "tManual":

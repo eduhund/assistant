@@ -6,6 +6,9 @@ function getTelegramContext(message, botContext) {
 				return "tManual";
 		}
 	}
+	if (text === "• инструкция •") {
+		return "tOrientation"
+	}
 	return "tManual";
 }
 
