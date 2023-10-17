@@ -14,15 +14,6 @@ async function sendMessageToTelegram({ to, intent, lang, data, params = {} }) {
 		options.reply_markup = replies;
 	}
 	if (intent.startsWith("start")) {
-		options.reply_markup = {
-			keyboard: [
-				[{ text: getPhrase(lang, "catKB") }],
-				[{ text: getPhrase(lang, "otherModulesKB") }],
-				//[{ text: getPhrase(lang, "diplomaKB") }],
-			],
-			is_persistent: true,
-			resize_keyboard: true,
-		};
 	}
 	await bot.telegram.sendMessage(to.userId, text, options);
 	log.debug("Telegram — Message has been sended: ", {

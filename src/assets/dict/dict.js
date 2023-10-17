@@ -3,7 +3,7 @@ const en = require("./en.json");
 
 const langs = { ru, en };
 
-const DEFAULT_LANG = process.env.DEFAULT_LANG || "en";
+const {DEFAULT_LANG} = process.env;
 
 function randomInteger(min, max) {
 	return Math.floor(min + Math.random() * (max - min + 1));

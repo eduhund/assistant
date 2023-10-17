@@ -15,6 +15,7 @@ function slackListenerRun() {
 		await processContext(context, data);
 	});
 
+	/*
 	listener.command("/broadcast", async ({ payload, ack }) => {
 		log.debug("Slack — New bot command: ", payload);
 		const data = await incomingData(payload);
@@ -49,6 +50,7 @@ function slackListenerRun() {
 		await processModals("sDmSubmit", data);
 		ack();
 	});
+	*/
 }
 
 module.exports = { slackListenerRun };

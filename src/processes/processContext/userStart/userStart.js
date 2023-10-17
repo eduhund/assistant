@@ -3,13 +3,7 @@ const getDBRequest = require("@mg/requests");
 const getActionQuery = require("../../../utils/actionsQueries");
 const { sendMessageToTelegram } = require("@tg/actions/actions");
 
-const INTENTS = {
-	EXISTING: "startExist",
-	NEW: "startNew",
-	STUDENT: "startStudent",
-};
-
-const DEFAULT_NAME = "студент";
+const DEFAULT_NAME = "человек";
 
 async function userStart({ from }) {
 	try {
@@ -22,7 +16,7 @@ async function userStart({ from }) {
 			from.email = user.email;
 			sendMessageToTelegram({
 				to: from,
-				intent: INTENTS[from.email ? "EXISTING" : "STUDENT"],
+				intent: "startExist",
 				lang: from.lang,
 				data: {
 					firstName: from.firstName || DEFAULT_NAME,
@@ -37,7 +31,7 @@ async function userStart({ from }) {
 		} else {
 			sendMessageToTelegram({
 				to: from,
-				intent: INTENTS["NEW"],
+				intent: "startNew",
 				lang: from.lang,
 			});
 
@@ -55,12 +49,6 @@ async function userStart({ from }) {
 					blocked: false,
 					lang: from.lang,
 				},
-			});
-
-			sendMessageToTelegram({
-				to: from,
-				intent: "changeEmailInit",
-				lang: from.lang,
 			});
 		}
 

@@ -12,7 +12,7 @@ const { telegramListenerRun } = require("@tg/listener");
 
 async function start() {
 	try {
-		await mongo.connect();
+		//await mongo.connect();
 		await bot.start();
 		await telegramListenerRun();
 		await slack.start();

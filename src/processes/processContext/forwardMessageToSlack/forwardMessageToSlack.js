@@ -8,31 +8,6 @@ const channelId = process.env.SLACK_CHANNEL;
 async function forwardMessageToSlack({ from, message }) {
 	try {
 		const now = Date.now();
-		const user = await getDBRequest("getUserInfo", {
-			query: { userId: from.userId },
-		});
-
-		if (!user) {
-			log.warn("User not found in database.\n", from);
-			return { OK: false, newBotContext: undefined };
-		}
-
-		const activeModules = [];
-
-		if (user.email) {
-			from.email = user.email;
-			const userModules = await getDBRequest("getStudentInfo", {
-				query: { email: user.email },
-				returns: ["modules"],
-			});
-			for (const [id, data] of Object.entries(userModules?.modules || {})) {
-				const deadline = Date.parse(data.deadline);
-				if (deadline > now) {
-					activeModules.push(id);
-				}
-			}
-			from.modules = activeModules;
-		}
 
 		const thread = await getDBRequest("getThread", {
 			query: { userId: from.userId, active: true },
@@ -53,7 +28,7 @@ async function forwardMessageToSlack({ from, message }) {
 			userId: from.userId,
 			source: "telegram",
 			dest: "slack",
-			role: "student",
+			role: "user",
 			text: message.text,
 			ts: now,
 		};

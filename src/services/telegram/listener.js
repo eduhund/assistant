@@ -21,13 +21,6 @@ function telegramListenerRun() {
 		processContext(context, data);
 	});
 
-	bot.command("settings", async (ctx) => {
-		log.debug("Telegram — New bot command: ", ctx);
-		const data = await incomingData(ctx.message);
-		const context = "tSettings";
-		processContext(context, data);
-	});
-
 	bot.on("callback_query", async (ctx) => {
 		log.debug("Telegram — New callback query: ", ctx);
 		const data = await incomingData(ctx.callbackQuery);
