@@ -11,6 +11,7 @@ function slackListenerRun() {
 	listener.message(async ({ payload }) => {
 		log.debug("Slack — New message: ", payload);
 		const data = await incomingData(payload);
+		console.log("Data:", data)
 		const context = getSlackContext(payload);
 		await processContext(context, data);
 	});

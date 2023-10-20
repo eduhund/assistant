@@ -2,17 +2,24 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 const { bot } = require("../services/telegram/telegram");
 
-function sendFileToStorage({ url, name, type }) {
-	try {
-		fetch(
-			`${process.env.T_FILE_DOWNLOADER}?fileUrl=${url}&name=${name}&type=${type}`,
-			{
-				method: "GET",
-			}
-		);
-	} catch (e) {
-		log.warn("File didn't save to Google Drive\n", e);
-	}
+async function sendFileToStorage(url, path) {
+	return new Promise((resolve, reject) => {
+		try {
+			const file = fs.createWriteStream(path);
+			fetch(url,	{method: "GET", headers: {
+				"Authorization": process.env.SLACK_TOKEN
+			}})
+			.then(response => response.body.pipe(file));
+
+			file.on("finish", () => {
+				file.close();
+				resolve()
+			});
+		} catch (e) {
+			log.warn("File didn't save to Google Drive\n", e);
+			reject()
+		}
+	})
 }
 
 async function getTelegramFileUrl(att) {
@@ -22,7 +29,10 @@ async function getTelegramFileUrl(att) {
 	}
 	try {
 		const fileUrl = await bot.telegram.getFileLink(fileId);
-		sendFileToStorage({ url: fileUrl });
+		const pathArray = fileUrl.pathname.split(".")
+		const type = pathArray[pathArray.length-1]
+		const filePath = `files/${Date.now()}.${type}`
+		sendFileToStorage(fileUrl, filePath);
 		return fileUrl;
 	} catch {
 		throw new Error("");
@@ -34,16 +44,11 @@ async function getSlackFileUrl(file) {
 		return;
 	}
 
-	const data = await fetch(
-		`${process.env.S_FILE_DOWNLOADER}?fileUrl=${file.url}&name=${file.name}&type=${file.type}&stage=${process.env.MACHINE}`,
-		{
-			method: "GET",
-		}
-	).then((response) => {
-		return response.json();
-	});
-	const url = data?.url;
-	return url;
+	const pathArray = file.url.split(".")
+	const type = pathArray[pathArray.length-1]
+	const filePath = `files/${Date.now()}.${type}`
+	//sendFileToStorage(fileUrl, filePath);
+	return "https://www.tehnomax.me/UserFiles/products/2023/001/large/17434.jpg" //`http://185.81.165.254:7777/${filePath}`;
 }
 
 module.exports = { getTelegramFileUrl, getSlackFileUrl };

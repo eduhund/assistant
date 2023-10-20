@@ -7,6 +7,8 @@ const port = process.env.SERVER_PORT || 8000;
 // Initialize
 const server = express();
 
+server.use("/files", express.static("files"))
+
 // Start function
 function start() {
 	return new Promise((resolve, reject) => {
