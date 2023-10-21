@@ -1,13 +1,14 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
 const { bot } = require("../services/telegram/telegram");
+const { Input } = require("telegraf");
 
 async function sendFileToStorage(url, path) {
 	return new Promise((resolve, reject) => {
 		try {
 			const file = fs.createWriteStream(path);
-			fetch(url,	{method: "GET", headers: {
-				"Authorization": process.env.SLACK_TOKEN
+			fetch(url, {method: "GET", headers: {
+				"Authorization": "Bearer " + process.env.SLACK_TOKEN
 			}})
 			.then(response => response.body.pipe(file));
 
@@ -43,12 +44,17 @@ async function getSlackFileUrl(file) {
 	if (!file) {
 		return;
 	}
+	try {
+		const pathArray = file.url.split(".")
+		const type = pathArray[pathArray.length-1]
+		const filePath = `files/${Date.now()}.${type}`
+		await sendFileToStorage(file.url, filePath);
+		const buffer = fs.readFileSync(filePath);
+		return Input.fromBuffer(buffer)
+	} catch (e) {
+		console.log(e)
+	}
 
-	const pathArray = file.url.split(".")
-	const type = pathArray[pathArray.length-1]
-	const filePath = `files/${Date.now()}.${type}`
-	//sendFileToStorage(fileUrl, filePath);
-	return "https://www.tehnomax.me/UserFiles/products/2023/001/large/17434.jpg" //`http://185.81.165.254:7777/${filePath}`;
 }
 
 module.exports = { getTelegramFileUrl, getSlackFileUrl };

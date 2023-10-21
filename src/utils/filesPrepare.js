@@ -13,8 +13,8 @@ async function filesPrepare(files = []) {
       preparedFiles.push(data);
     }
     return preparedFiles;
-  } catch {
-    throw new Error("Files list prepairing failed");
+  } catch (e) {
+    throw new Error("Files list prepairing failed:", e);
   }
 }
 module.exports = { filesPrepare };
