@@ -1,6 +1,6 @@
 function mainMessage({ from, to, message }) {
 	const { email, username, firstName, lastName, modules } = from;
-	const { text, att = {} } = message;
+	const { text } = message;
 	const informerMessage = `${firstName} ${lastName}: ${text}`;
 	const userInfo = `*<https://t.me/${username}|${firstName} ${lastName}>*${
 		email ? ` / ${email}` : ""
@@ -26,22 +26,22 @@ function mainMessage({ from, to, message }) {
 					emoji: true,
 				},
 			},
-			...(att?.image
+			...(att?.type === "image"
 				? [
 						{
 							type: "image",
-							image_url: att.image,
+							image_url: att.sUrl,
 							alt_text: "An incredibly cute kitten.",
 						},
 				  ]
 				: []),
-			...(att?.document
+			...(att?.type === "document"
 				? [
 						{
 							type: "section",
 							text: {
 								type: "mrkdwn",
-								text: `*<${att.document}|Посмотреть вложение>*`,
+								text: `*<${att.sUrl}|Посмотреть вложение>*`,
 							},
 						},
 				  ]

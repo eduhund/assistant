@@ -5,14 +5,19 @@ async function getAttachData(data) {
 	const {photo, sticker, video, video_note, audio, voice, document} = data
 
 	const imageUrl =
-	photo || sticker ? await getTelegramFileUrl(photo || sticker) : undefined;
+	photo || sticker ? await getTelegramFileUrl(photo || sticker) : null;
 	const media = video || video_note || audio || voice || document;
-	const docUrl = media ? await getTelegramFileUrl(media) : undefined;
+	const docUrl = media ? await getTelegramFileUrl(media) : null;
 
-	return {
-		image: imageUrl,
-		document: docUrl,
+	if (!imageUrl && !docUrl) {
+		return {}
+	} else {
+		return {
+			type: imageUrl ? "image" : "document",
+			buffer: imageUrl || docUrl,
+		}
 	}
+
 }
 
 function getFromData(data) {
@@ -40,7 +45,7 @@ async function getMessageData(data) {
 		date: date,
 		editDate: edit_date,
 		text: text || caption || data?.data || " ",
-		att: getAttachData(data),
+		att: await getAttachData(data),
 	}
 }
 

@@ -33,8 +33,9 @@ async function getTelegramFileUrl(att) {
 		const pathArray = fileUrl.pathname.split(".")
 		const type = pathArray[pathArray.length-1]
 		const filePath = `files/${Date.now()}.${type}`
-		sendFileToStorage(fileUrl, filePath);
-		return fileUrl;
+		await sendFileToStorage(fileUrl, filePath);
+		const buffer = fs.readFileSync(filePath);
+		return buffer;
 	} catch {
 		throw new Error("");
 	}
@@ -50,11 +51,10 @@ async function getSlackFileUrl(file) {
 		const filePath = `files/${Date.now()}.${type}`
 		await sendFileToStorage(file.url, filePath);
 		const buffer = fs.readFileSync(filePath);
-		return Input.fromBuffer(buffer)
+		return buffer
 	} catch (e) {
 		console.log(e)
 	}
-
 }
 
 module.exports = { getTelegramFileUrl, getSlackFileUrl };
