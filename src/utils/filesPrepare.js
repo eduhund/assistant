@@ -9,7 +9,7 @@ async function filesPrepare(files = []) {
         type: file.filetype,
         url: file.url_private_download,
       };
-      data.url = await getSlackFileUrl(data);
+      data.buffer = await getSlackFileUrl(data);
       preparedFiles.push(data);
     }
     return preparedFiles;

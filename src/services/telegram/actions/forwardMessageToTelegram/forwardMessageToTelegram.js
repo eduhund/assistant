@@ -1,3 +1,4 @@
+const { Input } = require("telegraf");
 const { log } = require("../../../../services/log/log");
 
 const { bot } = require("@tg/telegram");
@@ -9,28 +10,29 @@ async function forwardMessageToTelegram({ to, message }) {
 		await bot.telegram.sendMessage(userId, text);
 	}
 	if (att.length === 1) {
-		const { type, url } = att[0];
+		const { type, buffer } = att[0];
+		const file = Input.fromBuffer(buffer)
 		switch (type) {
 			case "png":
 			case "jpg":
-				await bot.telegram.sendPhoto(userId, url, {
+				await bot.telegram.sendPhoto(userId, file, {
 					caption: text,
 				});
 				break;
 			case "pdf":
 			case "zip":
-				await bot.telegram.sendDocument(userId, url, {
+				await bot.telegram.sendDocument(userId, file, {
 					caption: text,
 				});
 				break;
 			case "mpeg":
 			case "mov":
-				await bot.telegram.sendVideo(userId, url, {
+				await bot.telegram.sendVideo(userId, file, {
 					caption: text,
 				});
 				break;
 			case "gif":
-				await bot.telegram.sendAnimation(userId, url, {
+				await bot.telegram.sendAnimation(userId, file, {
 					caption: text,
 				});
 				break;
