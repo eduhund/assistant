@@ -10,7 +10,7 @@ async function forwardMessageToTelegram({ to, message }) {
 		await bot.telegram.sendMessage(userId, text);
 	}
 	if (att.length === 1) {
-		const { type, buffer } = att[0];
+		const { type, buffer, url } = att[0];
 		const file = Input.fromBuffer(buffer)
 		switch (type) {
 			case "png":
