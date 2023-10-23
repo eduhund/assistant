@@ -30,17 +30,10 @@ async function sendMessageToSlack({ from, to, message, data }) {
 			const response = await web.chat.postMessage(
 				mainMessage({ from, to, message })
 			);
-			if (message?.att?.buffer) {
-				await web.files.upload({file: message?.att?.buffer, channels: to?.channelId})
-			}
 			log.debug("Slack — Message has been sent: ", { from, to, message, data });
 			return response?.ts;
-
-		} else {
+		} else if (message.text) {
 			await web.chat.postMessage(threadMessage({ from, to, message }));
-			if (message?.att?.buffer) {
-				await web.files.upload({file: message?.att?.buffer, channels: to?.channelId, thread_ts: to.threadId})
-			}
 			log.debug("Slack — Message has been sent: ", { from, to, message, data });
 			return to.threadId;
 		}

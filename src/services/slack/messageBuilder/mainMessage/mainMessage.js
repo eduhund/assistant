@@ -26,26 +26,6 @@ function mainMessage({ from, to, message }) {
 					emoji: true,
 				},
 			},
-			...(att?.type === "image"
-				? [
-						{
-							type: "image",
-							image_url: att.sUrl,
-							alt_text: "An incredibly cute kitten.",
-						},
-				  ]
-				: []),
-			...(att?.type === "document"
-				? [
-						{
-							type: "section",
-							text: {
-								type: "mrkdwn",
-								text: `*<${att.sUrl}|Посмотреть вложение>*`,
-							},
-						},
-				  ]
-				: []),
 		],
 	};
 }

@@ -4,6 +4,7 @@ const { log } = require("../../../../services/log/log");
 const { bot } = require("@tg/telegram");
 
 async function forwardMessageToTelegram({ to, message }) {
+	console.log("Here: ", message)
 	const { userId } = to;
 	const { text, att = [] } = message;
 	if (att.length === 0) {
@@ -19,14 +20,9 @@ async function forwardMessageToTelegram({ to, message }) {
 					caption: text,
 				});
 				break;
-			case "pdf":
-			case "zip":
-				await bot.telegram.sendDocument(userId, file, {
-					caption: text,
-				});
-				break;
 			case "mpeg":
 			case "mov":
+			case "mp4":
 				await bot.telegram.sendVideo(userId, file, {
 					caption: text,
 				});
@@ -36,12 +32,25 @@ async function forwardMessageToTelegram({ to, message }) {
 					caption: text,
 				});
 				break;
+			case "mp3":
+				await bot.telegram.sendAudio(userId, file, {
+					caption: text,
+				});
+				break;
+			case "ogg": 
+				await bot.telegram.sendVoice(userId, file, {
+					caption: text,
+				});
+				break;
+			default:
+				await bot.telegram.sendDocument(userId, file, {
+					caption: text,
+				});
 		}
 		log.debug("Telegram — Message has been forwarded: ", {
 			to: userId,
 			text,
 			url,
-			caption,
 		});
 	}
 }

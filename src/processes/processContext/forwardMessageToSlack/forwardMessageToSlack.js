@@ -1,6 +1,6 @@
 const { log } = require("../../../services/log/log");
 const getDBRequest = require("@mg/requests");
-const { sendMessageToSlack } = require("@sl/actions/actions");
+const { sendMessageToSlack, sendFileToSlack } = require("@sl/actions/actions");
 const { sendMessageToTelegram } = require("@tg/actions/actions");
 
 const channelId = process.env.SLACK_CHANNEL;
@@ -60,6 +60,15 @@ async function forwardMessageToSlack({ from, message }) {
 					threadId,
 				},
 			});
+		}
+
+		if (message.att?.buffer) {
+			to.threadId = threadId
+			sendFileToSlack({
+				from,
+				to,
+				message,
+			})
 		}
 
 		return { OK: true, newBotContext: undefined };
