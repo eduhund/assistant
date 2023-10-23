@@ -32,7 +32,7 @@ async function sendMessageToSlack({ from, to, message, data }) {
 			);
 			log.debug("Slack — Message has been sent: ", { from, to, message, data });
 			return response?.ts;
-		} else if (message.text) {
+		} else if (message.text && message.text !== " ") {
 			await web.chat.postMessage(threadMessage({ from, to, message }));
 			log.debug("Slack — Message has been sent: ", { from, to, message, data });
 			return to.threadId;
