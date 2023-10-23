@@ -21,9 +21,8 @@ function mainMessage({ from, to, message }) {
 			{
 				type: "section",
 				text: {
-					type: "plain_text",
-					text: text || " ",
-					emoji: true,
+					type: "mrkdwn",
+					text: text || " "
 				},
 			},
 		],
