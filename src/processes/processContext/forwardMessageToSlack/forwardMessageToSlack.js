@@ -63,7 +63,7 @@ async function forwardMessageToSlack({ from, message }) {
 		}
 
 		if (message.att?.buffer) {
-			to.threadId = threadId
+			to.threadId = to.threadId || threadId
 			sendFileToSlack({
 				from,
 				to,
