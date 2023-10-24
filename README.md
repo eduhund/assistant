@@ -26,13 +26,13 @@ To succeed, you need any machine with these requirements and installed NodeJS > 
 * **SLACK\_TOKEN** — Slack Bot token. Starts with *xoxb-*
 * **SLACK\_APP\_TOKEN** — Slack App token. Starts with *xapp-*
 * **SLACK\_SECRET** — Slack Bot secret. Deprecated and not using.
-* **SLACK\_PORT** — Using for incoming events from Slack. Not using for WebSocket connection. Default is 9999
+* **SLACK\_PORT** — Using for incoming events from Slack. Not using for WebSocket connection. Default is *9999*
 * **SLACK\_CHANNEL** — Channel ID, where you want to receive new messages.
-* **MONGO\_URL** — URL for local or Atlas database. The local default is "mongodb://127.0.0.1:27017/"
-* **BOT\_DATABASE** — Database name. Prefer is"assistant"
-* **SERVER_PORT** — Express server port for external events. Default is 9998
-* **DEFAULT\_LANG** — Default is "ru"
-* **MACHINE** — Default is "local"
+* **MONGO\_URL** — URL for local or Atlas database. The local default is *"mongodb://127.0.0.1:27017/"*
+* **BOT\_DATABASE** — Database name. Prefer is *"assistant"*
+* **SERVER_PORT** — Express server port for external events. Default is *9998*
+* **DEFAULT\_LANG** — Default is *"ru"*
+* **MACHINE** — Default is *"local"*
 * **SLACK\_CHANNEL\_ID** — Slack channel ID for external logging
 * **SLACK\_BOT\_TOKEN** — Slack Bot token for external logging
 
