@@ -1,19 +1,22 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
 const { bot } = require("../services/telegram/telegram");
-const { Input } = require("telegraf");
 
-async function sendFileToStorage(url, path) {
+async function sendFileToStorage(url) {
 	return new Promise((resolve, reject) => {
 		try {
-			const file = fs.createWriteStream(path);
+			const pathArray = url.split(".")
+			const type = pathArray[pathArray.length-1]
+			const filePath = `files/${Date.now()}.${type}`
+
+			const file = fs.createWriteStream(filePath);
 			fetch(url, {method: "GET", headers: {
 				"Authorization": "Bearer " + process.env.SLACK_TOKEN
 			}})
 			.then(response => response.body.pipe(file));
 
 			file.on("finish", () => {
-				file.close();
+				file.close(filePath);
 				resolve()
 			});
 		} catch (e) {
@@ -30,12 +33,8 @@ async function getTelegramFileUrl(att) {
 	}
 	try {
 		const fileUrl = await bot.telegram.getFileLink(fileId);
-		const pathArray = fileUrl.pathname.split(".")
-		const type = pathArray[pathArray.length-1]
-		const filePath = `files/${Date.now()}.${type}`
-		await sendFileToStorage(fileUrl, filePath);
-		const buffer = fs.readFileSync(filePath);
-		return buffer;
+		const filePath = await sendFileToStorage(fileUrl.pathname);
+		return fs.readFileSync(filePath);
 	} catch {
 		throw new Error("");
 	}
@@ -46,12 +45,8 @@ async function getSlackFileUrl(file) {
 		return;
 	}
 	try {
-		const pathArray = file.url.split(".")
-		const type = pathArray[pathArray.length-1]
-		const filePath = `files/${Date.now()}.${type}`
-		await sendFileToStorage(file.url, filePath);
-		const buffer = fs.readFileSync(filePath);
-		return buffer
+		const filePath = await sendFileToStorage(file.url);
+		return fs.readFileSync(filePath);
 	} catch (e) {
 		console.log(e)
 	}
