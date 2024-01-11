@@ -1,4 +1,4 @@
-# Support Assistant
+# Chacha | Support Assistant
 
 ### Support & Donation
 
@@ -12,7 +12,7 @@ The place for the best intro.
 ## Prepairing
 
 ### Configure your channels
-Assistant can exchange messages between two platforms: Telegram and Slack. Your customers, or product users, can use your Telegram Bot to chat with you on the one hand, and on the other hand, your support team is able to make a dialog, using a separate Slack channel.
+Chacha can exchange messages between two platforms: Telegram and Slack. Your customers, or product users, can use your Telegram Bot to chat with you on the one hand, and on the other hand, your support team is able to make a dialog, using a separate Slack channel.
 
 That's why you need to have both channels. If you don't have them, you can create one by the links below:
 
@@ -20,18 +20,18 @@ That's why you need to have both channels. If you don't have them, you can creat
 2. Create a [Slack Workspace](https://slack.com/get-started#/createnew) and an App for your workspace via the [Slack App Directory](https://slack.com/apps).
 
 ### Check the environment
-Assistant — it's a self-deployment platform.
+Chacha — it's a self-deployment platform.
 
 The minimum hardware requirements are 1 core CPU, 512 Mb RAM, and 1GB of storage (the app saves the attachments locally).
 
 Besides, you need to have NodeJS > 18.18.2 installed and a compatible npm version.
 
-The last thing, you need a database. For now, the Assistant works with MongoDB. You can connect your existing database or create a new one [locally](https://www.mongodb.com/docs/manual/installation/) or via the [MongoDB Atlas](https://www.mongodb.com/atlas)
+The last thing, you need a database. For now, Chacha works with MongoDB. You can connect your existing database or create a new one [locally](https://www.mongodb.com/docs/manual/installation/) or via the [MongoDB Atlas](https://www.mongodb.com/atlas)
 
 ## Deployment
 
 ### Steps
-1. Clone the repository `git clone https://github.com/eduhund/assistant.git`
+1. Clone the repository `git clone https://github.com/eduhund/chacha.git`
 2. Install dependencies `npm i`
 3. Configure the .env file from the template
 4. Run the application `npm start`

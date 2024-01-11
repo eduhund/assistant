@@ -1,7 +1,7 @@
 {
-	"name": "eduhund_bot",
+	"name": "chacha",
 	"version": "3.0.0",
-	"description": "Help bot for Eduhund education platform",
+	"description": "Support assistant platform",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
