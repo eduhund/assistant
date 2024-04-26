@@ -1,20 +1,31 @@
 # Chacha | Support Assistant
 
-### Support & Donation
-
-Our team creates fully open-source tools and solutions for developers, designers, and those who teach these subjects. You can help us: share this tool, contribute to it, or donate to us to support future work. 
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=7Z9A2PABQU584)
+![ChaCha](https://github.com/eduhund/chacha/assets/141957200/6911c285-6d7c-4b83-952e-75c926af4ee8)
 
 ## About
-The place for the best intro.
+
+Your clients or users use instant messengers (WhatsApp, Skype, LINE, WeChat, Viber, Snapchat, Telegram and others) to send messages, and you conduct a dialogue using a separate Slack channel. You can add to Slack channelas many users as you like. Either one person or a whole group of specialists can respond to messages from your users and clients.
+
+## Who are the users? 
+
+Medium, medium-large (but not really large), small business in any area. Any in which some kind of communication with users is built.
+
+## What problems does ChaCha solve?
+
+1. ChaCha creates a familiar/natural communication environment between the user and the business. Both on one side and on the other. There are no more forms to fill out on the site, no need to leave/fill out your personal data anywhere and then wait for days for a support employee to contact you. ChaCha simplifies not only the process of communication itself, but also the moment of entering it.
+2. Businesses no longer need to study (spend resources on studying) any third-party services to build communication with users. There is no need to deploy an endless number of tools for different tasks. The entire dialogue is conducted in the usual communication channel for business.
+3. There is no chance of missing something important on the business side.
+4. The necessary qualified support is provided in time and from various specialists. Sometimes even at the same time. One window principle.
+5. Tool flexibility. The ability to customize the tool to suit the needs of a specific business.
 
 ## Prepairing
 
 ### Configure your channels
-Chacha can exchange messages between two platforms: Telegram and Slack. Your customers, or product users, can use your Telegram Bot to chat with you on the one hand, and on the other hand, your support team is able to make a dialog, using a separate Slack channel.
 
-That's why you need to have both channels. If you don't have them, you can create one by the links below:
+We integrated two familiar channels. For users - Telegram, for us - Slack.
+In general, a bunch of services can be anything (anything that supports external management). We chose Telegram because, in comparison with other services, it has more integration options than other similar social networks (WhatsApp, Skype, LINE, WeChat, Viber, Snapchat, etc.).
+
+You need to have both channels. If you don't have them, you can create one by the links below:
 
 1. Create a Telegram bot via the [BotFather](https://t.me/BotFather)
 2. Create a [Slack Workspace](https://slack.com/get-started#/createnew) and an App for your workspace via the [Slack App Directory](https://slack.com/apps).
@@ -52,5 +63,8 @@ The last thing, you need a database. For now, Chacha works with MongoDB. You can
 * **SLACK\_CHANNEL\_ID** — Slack channel ID for external logging
 * **SLACK\_BOT\_TOKEN** — Slack Bot token for external logging
 
-## Using
-to be continued...
+### Support & Donation
+
+Our team creates fully open-source tools and solutions for developers, designers, and those who teach these subjects. You can help us: share this tool, contribute to it, or donate to us to support future work. 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=7Z9A2PABQU584)
