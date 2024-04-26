@@ -8,7 +8,7 @@ Your clients or users use instant messengers (WhatsApp, Skype, LINE, WeChat, Vib
 
 ## Who are the users? 
 
-Medium, medium-large (but not really large), small business in any area. Any in which some kind of communication with users is built.
+Medium, medium-large (but not really large), small businesses in any area. Any in which some kind of communication with users is built.
 
 ## What problems does ChaCha solve?
 
